@@ -53,7 +53,7 @@ def retrieve(results1,results2,results3,results4,recall,total_docs,total_users,t
     qid = 0
     userid = 1
     print("total docs are",total_docs,"total users are",total_users,"total no of queries = ",total_queries)
-    limit=int(recall*total_docs) 
+    limit=int(recall*total_docs)
     ret_q=dict()
     id=0
     ret_u=[]
@@ -147,13 +147,9 @@ def evaluate(recall,ret_q,ret_u,ret_qu1,ret_qu2,rel,total_docs,total_users,total
 def main():
     m=dict()
     queries, corpus,profile,total_docs,total_users,total_queries=text()
-    # results1,results2,results3,results4=score( queries, corpus,profile,b=0.75)
-    # ret_q,ret_u,ret_qu1,ret_qu2=retrieve(results1,results2,results3,results4,recall,total_docs,total_users,total_queries)
-    # m=evaluate(recall,total_queries,ret_q,ret_u,ret_qu1,ret_qu2,rel,total_docs,total_users,total_queries)
-    # print(ret_q,ret_u,ret_qu1,ret_qu2)
+
     b=[0.2,0.4,0.6,0.8,1.0]
     m1=dict()
-    m2=dict()
     m1['map_q']=[]
     m1['map_u']=[]
     m1['map_qu_sc']=[]
@@ -162,26 +158,24 @@ def main():
     m2['map_u']=[]
     m2['map_qu_sc']=[]
     m2['map_qu_fc']=[]
-    
+
     for i in range(0,len(b)):
         results1,results2,results3,results4,results5,results6,results7,results8=score( queries, corpus,profile,b[i])
-        
+
         ret_q_tp,ret_u_tp,ret_qu1_tp,ret_qu2_tp=retrieve(results1,results2,results3,results4,recall,total_docs,total_users,total_queries)
         m1= evaluate(recall,ret_q_tp,ret_u_tp,ret_qu1_tp,ret_qu2_tp,rel,total_docs,total_users,total_queries,m1)
-        #ret_q,ret_u,ret_qu1,ret_qu2=retrieve(results5,results6,results7,results8,recall,total_docs,total_users,total_queries)
-        #m2= evaluate(recall,ret_q,ret_u,ret_qu1,ret_qu2,rel,total_docs,total_users,total_queries,m2)
+
     for i in range(0,len(b)):
         print ("the value of b is", b[i])
         for res in m1:
-            print('The corresponding map values are ', m1[res][i]) 
+            print('The corresponding map values are ', m1[res][i])
 
     print ('Evaluation done')
-        
-    # plt.plot(m1['map_q'],b,label=str(res))
-    # for res in m2:
-    #     plt.plot(m2[res],b,label=str(res))
-    #plt.legend()
-    #plt.show()
+
+    plt.plot(m1['map_q'],b,label=str(res))
+
+    plt.legend()
+    plt.show()
 
 
 
@@ -190,7 +184,7 @@ def main():
 
 
 
- 
+
 
 
 print("hello")
